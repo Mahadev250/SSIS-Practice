@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33130.400
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "FilmsForLookupExercise", "FilmsForLookupExercise\FilmsForLookupExercise.dtproj", "{C96DCCD3-1A9C-47DF-9D14-A8749397B2A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C96DCCD3-1A9C-47DF-9D14-A8749397B2A9}.Development|Default.ActiveCfg = Development
+		{C96DCCD3-1A9C-47DF-9D14-A8749397B2A9}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {837CA635-08CB-4DC4-8204-1A70FD9620D9}
+	EndGlobalSection
+EndGlobal

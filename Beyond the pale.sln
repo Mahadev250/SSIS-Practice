@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33130.400
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Beyond the pale", "Beyond the pale\Beyond the pale.dtproj", "{6441E0DC-ABE8-4DF1-8529-98413A0382C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6441E0DC-ABE8-4DF1-8529-98413A0382C1}.Development|Default.ActiveCfg = Development
+		{6441E0DC-ABE8-4DF1-8529-98413A0382C1}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDA4BA60-37AF-4AB3-AD3A-34B80D2F2B0D}
+	EndGlobalSection
+EndGlobal
