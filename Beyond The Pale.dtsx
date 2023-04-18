@@ -1,0 +1,1146 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/24/2023 6:02:00 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-VPNF6AQ"
+  DTS:CreatorName="DESKTOP-VPNF6AQ\Admin"
+  DTS:DTSID="{50CB31B2-515E-41D6-B4E0-0E6661E7D49F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Beyond the Pale"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{8DDD6583-282F-4644-A2F6-B01CF22F9C69}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Cache Connection Manager]"
+      DTS:CreationName="CACHE"
+      DTS:DTSID="{286569A4-25A1-45AC-9D39-EFDB04E9F3D3}"
+      DTS:ObjectName="Cache Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager>
+          <DTS:CacheColumns>
+            <DTS:CacheColumn
+              DTS:DataType="5"
+              DTS:ObjectName="CentreId"
+              DTS:DTSID="{B04C948A-990B-49B4-96D6-04C7F36B3588}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="130"
+              DTS:Length="255"
+              DTS:ObjectName="CentreName"
+              DTS:DTSID="{35B853A8-3774-41E7-B226-5ACF42DE6EB2}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="130"
+              DTS:Length="255"
+              DTS:ObjectName="PostCode"
+              DTS:DTSID="{C7050AA9-921C-4BC5-B274-0E53A81B9BAB}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="5"
+              DTS:ObjectName="SquareMetres"
+              DTS:DTSID="{D35669EE-393F-4972-8C81-436DBD7248C0}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="5"
+              DTS:ObjectName="NumberUnits"
+              DTS:DTSID="{A641FAD8-5053-4202-BD73-432C9E460105}"
+              DTS:CreationName="" />
+            <DTS:CacheColumn
+              DTS:DataType="130"
+              DTS:Length="255"
+              DTS:IndexPosition="1"
+              DTS:ObjectName="Details"
+              DTS:DTSID="{B477F881-AB1C-4973-A8F7-62B3C65F56C9}"
+              DTS:CreationName="" />
+          </DTS:CacheColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{F8CFB83E-22C5-4E2A-B383-A343E91A545B}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\SSIS data\List of centres.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Lookup Revised list Details column from original list"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{405B8EC6-03EB-4961-8660-A6667B43BE91}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lookup Revised list Details column from original list"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Lookup Revised list Details column from original list\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from () [refTable]
+where [refTable].[Details] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CentreId" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CentreName" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PostCode" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SquareMetres" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NumberUnits" dataType="DT_R8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Details" dataType="DT_WSTR" length="255" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[Details]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lookup Revised list Details column from original list\Lookup.Connections[CacheConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cache Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cache Connection Manager]"
+                  description="Connection manager used to access lookup data."
+                  name="CacheConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lookup Revised list Details column from original list\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Lookup.Inputs[Lookup Input].Columns[Details]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Details"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[Details]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Details</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Lookup Revised list Details column from original list\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Match Output].Columns[Details]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Match Output].Columns[Details]"
+                      name="Details"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Details</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Lookup Revised list Details column from original list\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Lookup Revised list Details column from original list\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup Revised list Details column from original list\Revised list"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Revised list"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Revised list$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lookup Revised list Details column from original list\Revised list.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[CentreId]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[CentreId]"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[CentreId]"
+                      name="CentreId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[CentreName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[CentreName]"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[CentreName]"
+                      name="CentreName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[PostCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[PostCode]"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[PostCode]"
+                      name="PostCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[SquareMetres]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[SquareMetres]"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[SquareMetres]"
+                      name="SquareMetres"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[NumberUnits]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[NumberUnits]"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[NumberUnits]"
+                      name="NumberUnits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[Details]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[Details]"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[Details]"
+                      name="Details"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[CentreId]"
+                      dataType="r8"
+                      name="CentreId" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[CentreName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CentreName" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[PostCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="PostCode" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[SquareMetres]"
+                      dataType="r8"
+                      name="SquareMetres" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[NumberUnits]"
+                      dataType="r8"
+                      name="NumberUnits" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].ExternalColumns[Details]"
+                      dataType="wstr"
+                      length="255"
+                      name="Details" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[CentreId]"
+                      dataType="r8"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[CentreId]"
+                      name="CentreId" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[CentreName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[CentreName]"
+                      name="CentreName" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[PostCode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[PostCode]"
+                      name="PostCode" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[SquareMetres]"
+                      dataType="r8"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[SquareMetres]"
+                      name="SquareMetres" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[NumberUnits]"
+                      dataType="r8"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[NumberUnits]"
+                      name="NumberUnits" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[Details]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[Details]"
+                      name="Details" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup Revised list Details column from original list\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1].Columns[CentreId]"
+                      cachedDataType="r8"
+                      cachedName="CentreId"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[CentreId]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[CentreId]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1].Columns[CentreName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CentreName"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[CentreName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[CentreName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1].Columns[PostCode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PostCode"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[PostCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[PostCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1].Columns[SquareMetres]"
+                      cachedDataType="r8"
+                      cachedName="SquareMetres"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[SquareMetres]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[SquareMetres]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1].Columns[NumberUnits]"
+                      cachedDataType="r8"
+                      cachedName="NumberUnits"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[NumberUnits]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[NumberUnits]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1].Columns[Details]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Details"
+                      lineageId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output].Columns[Details]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[Details]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 2]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[CentreId]"
+                      dataType="r8"
+                      lineageId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[CentreId]"
+                      name="CentreId" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[CentreName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[CentreName]"
+                      name="CentreName" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[PostCode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[PostCode]"
+                      name="PostCode" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[SquareMetres]"
+                      dataType="r8"
+                      lineageId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[SquareMetres]"
+                      name="SquareMetres" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[NumberUnits]"
+                      dataType="r8"
+                      lineageId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[NumberUnits]"
+                      name="NumberUnits" />
+                    <outputColumn
+                      refId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[Details]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Lookup Revised list Details column from original list\Union All.Outputs[Union All Output 1].Columns[Details]"
+                      name="Details" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Lookup Revised list Details column from original list.Paths[Excel Source Output]"
+              endId="Package\Lookup Revised list Details column from original list\Lookup.Inputs[Lookup Input]"
+              name="Excel Source Output"
+              startId="Package\Lookup Revised list Details column from original list\Revised list.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Lookup Revised list Details column from original list.Paths[Lookup No Match Output]"
+              endId="Package\Lookup Revised list Details column from original list\Union All.Inputs[Union All Input 1]"
+              name="Lookup No Match Output"
+              startId="Package\Lookup Revised list Details column from original list\Lookup.Outputs[Lookup No Match Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Read original list to cache"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{839C170D-FBFE-4F6B-ABD8-17821DB879ED}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Read original list to cache"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Read original list to cache\Cache Transform"
+              componentClassID="Microsoft.Cache"
+              contactInfo="Cache Transform;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Writes data to a cache (a .caw file) with the Cache Connection Manager. Reuse the cache between multiple Lookup transforms to reduce database load. Share the cache to reduce memory usage. Note: cache data is stored in clear text and not recommended for sensitive data."
+              name="Cache Transform">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Read original list to cache\Cache Transform.Connections[CacheConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Cache Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Cache Connection Manager]"
+                  description="The connection used to access the cache."
+                  name="CacheConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input]"
+                  hasSideEffects="true"
+                  name="Cache Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input].Columns[CentreId]"
+                      cachedDataType="r8"
+                      cachedName="CentreId"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[CentreId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">CentreId</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input].Columns[CentreName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CentreName"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[CentreName]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">CentreName</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input].Columns[PostCode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PostCode"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[PostCode]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">PostCode</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input].Columns[SquareMetres]"
+                      cachedDataType="r8"
+                      cachedName="SquareMetres"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[SquareMetres]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">SquareMetres</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input].Columns[NumberUnits]"
+                      cachedDataType="r8"
+                      cachedName="NumberUnits"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[NumberUnits]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">NumberUnits</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input].Columns[Details]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Details"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[Details]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="The cache column associated with the input column."
+                          name="CacheColumnName">Details</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Read original list to cache\Cache Transform.Outputs[Cache Output]"
+                  name="Cache Output"
+                  synchronousInputId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Read original list to cache\Original list"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Original list"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Original list$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Read original list to cache\Original list.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[CentreId]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[CentreId]"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[CentreId]"
+                      name="CentreId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[CentreName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[CentreName]"
+                      length="255"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[CentreName]"
+                      name="CentreName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[PostCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[PostCode]"
+                      length="255"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[PostCode]"
+                      name="PostCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[SquareMetres]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[SquareMetres]"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[SquareMetres]"
+                      name="SquareMetres"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[NumberUnits]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[NumberUnits]"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[NumberUnits]"
+                      name="NumberUnits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[Details]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[Details]"
+                      length="255"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].Columns[Details]"
+                      name="Details"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[CentreId]"
+                      dataType="r8"
+                      name="CentreId" />
+                    <externalMetadataColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[CentreName]"
+                      dataType="wstr"
+                      length="255"
+                      name="CentreName" />
+                    <externalMetadataColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[PostCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="PostCode" />
+                    <externalMetadataColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[SquareMetres]"
+                      dataType="r8"
+                      name="SquareMetres" />
+                    <externalMetadataColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[NumberUnits]"
+                      dataType="r8"
+                      name="NumberUnits" />
+                    <externalMetadataColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Output].ExternalColumns[Details]"
+                      dataType="wstr"
+                      length="255"
+                      name="Details" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[CentreId]"
+                      dataType="r8"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[CentreId]"
+                      name="CentreId" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[CentreName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[CentreName]"
+                      name="CentreName" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[PostCode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[PostCode]"
+                      name="PostCode" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[SquareMetres]"
+                      dataType="r8"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[SquareMetres]"
+                      name="SquareMetres" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[NumberUnits]"
+                      dataType="r8"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[NumberUnits]"
+                      name="NumberUnits" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[Details]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[Details]"
+                      name="Details" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Read original list to cache\Original list.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Read original list to cache.Paths[Excel Source Output]"
+              endId="Package\Read original list to cache\Cache Transform.Inputs[Cache Input]"
+              name="Excel Source Output"
+              startId="Package\Read original list to cache\Original list.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{33F7A823-88EB-4406-BD62-9B5A432E6A16}"
+      DTS:From="Package\Read original list to cache"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Lookup Revised list Details column from original list" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Read original list to cache"
+          TopLeft="189.5,80.5" />
+        <NodeLayout
+          Size="176,78"
+          Id="Package\Lookup Revised list Details column from original list"
+          TopLeft="198.5,170.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="289.25,122.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Read original list to cache">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Read original list to cache\Original list"
+          TopLeft="181.5,65.5" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Read original list to cache\Cache Transform"
+          TopLeft="163.5,156.5" />
+        <EdgeLayout
+          Id="Package\Read original list to cache.Paths[Excel Source Output]"
+          TopLeft="247,107.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Read original list to cache\Original list">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Lookup Revised list Details column from original list">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Lookup Revised list Details column from original list\Revised list"
+          TopLeft="194.5,69.5" />
+        <NodeLayout
+          Size="115,42"
+          Id="Package\Lookup Revised list Details column from original list\Lookup"
+          TopLeft="203.5,172.5" />
+        <EdgeLayout
+          Id="Package\Lookup Revised list Details column from original list.Paths[Excel Source Output]"
+          TopLeft="261.5,111.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Lookup Revised list Details column from original list\Union All"
+          TopLeft="204.5,285.5" />
+        <EdgeLayout
+          Id="Package\Lookup Revised list Details column from original list.Paths[Lookup No Match Output]"
+          TopLeft="263.5,214.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-64.6750390625,23.75,129.350078125,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Lookup Revised list Details column from original list\Revised list">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Lookup Revised list Details column from original list\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
